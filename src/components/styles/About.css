@@ -62,12 +62,12 @@
 
 .image-border {
   position: relative;
-  width: 280px;
-  height: 280px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   background: linear-gradient(135deg, #00adb5, #00c9d4);
   padding: 6px;
-  animation: rotate 20s linear infinite;
+  /* animation: rotate 20s linear infinite; */
 }
 
 @keyframes rotate {
