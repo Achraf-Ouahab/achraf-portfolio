@@ -1,6 +1,10 @@
 import "./styles/Skills.css"
+import { useState } from 'react';
+
 
 function Skills() {
+  const [activeTab, setActiveTab] = useState('languages');
+
   const skillsData = {
     languages: [
       { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
@@ -28,12 +32,12 @@ function Skills() {
     ],
   };
 
-  const categories = [
-    { key: 'languages', title: 'Langages' },
-    { key: 'frontend', title: 'Frontend' },
-    { key: 'backend', title: 'Backend' },
-    { key: 'database', title: 'Bases de données' },
-    { key: 'tools', title: 'Outils & DevOps' },
+  const tabs = [
+    { key: 'languages', title: 'Langages', icon: '' },
+    { key: 'frontend', title: 'Frontend', icon: '' },
+    { key: 'backend', title: 'Backend', icon: '' },
+    { key: 'database', title: 'Bases de données', icon: '' },
+    { key: 'tools', title: 'Outils', icon: '' },
   ];
 
   return (
@@ -45,22 +49,36 @@ function Skills() {
           <div className="title-underline"></div>
         </div>
 
-        <div className="skills-categories">
-          {categories.map((category) => (
-            <div key={category.key} className="skill-category-block">
-              <h3 className="category-title">{category.title}</h3>
-              <div className="skills-row">
-                {skillsData[category.key].map((skill, index) => (
-                  <div key={index} className="skill-item">
-                    <div className="skill-icon-wrapper">
-                      <img src={skill.icon} alt={skill.name} className="skill-icon" />
-                    </div>
-                    <span className="skill-name">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+        {/* Tabs Navigation */}
+        <div className="tabs-navigation">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              className={`tab-button ${activeTab === tab.key ? 'active' : ''}`}
+              onClick={() => setActiveTab(tab.key)}
+            >
+              <span className="tab-icon">{tab.icon}</span>
+              <span className="tab-title">{tab.title}</span>
+            </button>
           ))}
+        </div>
+
+        {/* Skills Content */}
+        <div className="skills-content">
+          <div className="skills-row">
+            {skillsData[activeTab].map((skill, index) => (
+              <div 
+                key={index} 
+                className="skill-item"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="skill-icon-wrapper">
+                  <img src={skill.icon} alt={skill.name} className="skill-icon" />
+                </div>
+                <span className="skill-name">{skill.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>
