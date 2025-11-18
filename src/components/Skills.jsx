@@ -1,8 +1,26 @@
 import "./styles/Skills.css"
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 function Skills() {
+  const { t } = useLanguage();
+  const [isVisible, setIsVisible] = useState(false);
+  
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        },
+        { threshold: 0.2 }
+      );
+  
+      const section = document.getElementById("skills");
+      if (section) observer.observe(section);
+  
+      return () => observer.disconnect();
+    }, []);
   const [activeTab, setActiveTab] = useState('languages');
 
   const skillsData = {
@@ -33,19 +51,19 @@ function Skills() {
   };
 
   const tabs = [
-    { key: 'languages', title: 'Langages', icon: '' },
-    { key: 'frontend', title: 'Frontend', icon: '' },
-    { key: 'backend', title: 'Backend', icon: '' },
-    { key: 'database', title: 'Bases de données', icon: '' },
-    { key: 'tools', title: 'Outils', icon: '' },
+    { key: 'languages', title: t('skills.languages'), icon: '' },
+    { key: 'frontend', title: t('skills.frontend'), icon: '' },
+    { key: 'backend', title: t('skills.backend'), icon: '' },
+    { key: 'database', title: t('skills.database'), icon: '' },
+    { key: 'tools', title: t('skills.tools'), icon: '' },
   ];
 
   return (
     <section id="skills" className="skills-section">
-      <div className="skills-container">
+      <div className={`skills-container ${isVisible ? 'visible' : ''}`}>
         
         <div className="skills-header">
-          <h2 className="skills-title">Compétences</h2>
+          <h2 className="skills-title">{t('skills.title')}</h2>
           <div className="title-underline"></div>
         </div>
 

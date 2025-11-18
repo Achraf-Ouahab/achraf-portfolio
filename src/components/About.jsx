@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import "./styles/About.css";
-
+import { useLanguage } from '../context/LanguageContext';
 function About() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ function About() {
         <div className={`about-content ${isVisible ? "visible" : ""}`}>
           {/* Header */}
           <div className="about-header">
-            <h2 className="about-title">À propos de moi</h2>
+            <h2 className="about-title">{t('about.title')}</h2>
             <div className="title-underline"></div>
           </div>
 
@@ -50,33 +51,27 @@ function About() {
             {/* Right Column - Text Content */}
             <div className="text-content">
               <p className="intro">
-                Bonjour ! Je suis{" "}
-                <span className="highlight">OUAHAB Achraf</span>, un développeur
-                web passionné par la création d'expériences numériques
-                innovantes et performantes.
+                {t('about.intro')}{" "}
+                <span className="highlight">{t('about.name')}</span>, {t('about.description')}
               </p>
 
               <p className="description">
-                Spécialisé dans le développement full-stack, je combine
-                créativité et compétences techniques pour transformer des idées
-                en solutions digitales concrètes. Mon approche se concentre sur
-                la qualité du code, l'expérience utilisateur et les performances
-                optimales.
+                {t('about.fullDescription')}
               </p>
 
               {/* Stats Cards */}
               <div className="stats-grid">
                 <div className="stat-card">
                   <div className="stat-number">3+</div>
-                  <div className="stat-label">Années d'expérience</div>
+                  <div className="stat-label">{t('about.stats.experience')}</div>
                 </div>
                 <div className="stat-card">
-                  <div className="stat-number">15+</div>
-                  <div className="stat-label">Projets réalisés</div>
+                  <div className="stat-number">10+</div>
+                  <div className="stat-label">{t('about.stats.projects')}</div>
                 </div>
                 <div className="stat-card">
                   <div className="stat-number">8+</div>
-                  <div className="stat-label">Technologies</div>
+                  <div className="stat-label">{t('about.stats.technologies')}</div>
                 </div>
               </div>
 
@@ -95,7 +90,7 @@ function About() {
                     </svg>
                   </div>
                   <span className="key-point-text">
-                    Code propre et maintenable
+                    {t('about.keyPoints.clean')}
                   </span>
                 </div>
                 <div className="key-point">
@@ -110,7 +105,7 @@ function About() {
                       />
                     </svg>
                   </div>
-                  <span className="key-point-text">Solutions performantes</span>
+                  <span className="key-point-text">{t('about.keyPoints.performance')}</span>
                 </div>
                 <div className="key-point">
                   <div className="icon-circle">
@@ -127,12 +122,12 @@ function About() {
                       />
                     </svg>
                   </div>
-                  <span className="key-point-text">Design responsive</span>
+                  <span className="key-point-text">{t('about.keyPoints.responsive')}</span>
                 </div>
               </div>
 
               <a href="#contact" className="about-btn">
-                Travaillons ensemble
+                {t('about.cta')}
               </a>
             </div>
           </div>

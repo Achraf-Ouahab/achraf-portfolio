@@ -1,7 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './styles/Contact.css';
+import { useLanguage } from '../context/LanguageContext';
+import  socialLinks  from '../data/SocialLinks.jsx';
 
 function Contact() {
+  const { t } = useLanguage();
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    const section = document.getElementById("contact");
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,7 +42,7 @@ function Contact() {
     setStatus('');
 
     try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('https://formspree.io/f/xldzdqlw', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -47,50 +66,55 @@ function Contact() {
 
   return (
     <section id="contact" className="contact-section">
-      <div className="contact-container">
-        
+      <div className={`contact-container ${isVisible ? 'visible' : ''}`}>
+
         <div className="contact-header">
-          <h2 className="contact-title">Contact</h2>
+          <h2 className="contact-title">{t('contact.title')}</h2>
           <div className="title-underline"></div>
         </div>
 
         <div className="contact-content">
-          
+
           {/* Left Side - Info */}
           <div className="contact-info">
             <p className="contact-text">
-              Vous avez un projet en tête ou une question ? 
-              N'hésitez pas à me contacter, je serais ravi d'échanger avec vous.
+              {t('contact.description')}
             </p>
-            
+
             <div className="contact-details">
               <div className="detail-item">
-                <span className="detail-label">Email</span>
+                <span className="detail-label">{t('contact.email')}</span>
                 <a href="mailto:achrafdev20@gmail.com" className="detail-value">
                   achrafdev20@gmail.com
                 </a>
               </div>
-              
+
               <div className="detail-item">
-                <span className="detail-label">Téléphone</span>
+                <span className="detail-label">{t('contact.phone')}</span>
                 <a href="tel:+212675102609" className="detail-value">
                   +212 6 75 10 26 09
                 </a>
               </div>
-              
+
               <div className="detail-item">
-                <span className="detail-label">Localisation</span>
+                <span className="detail-label">{t('contact.location')}</span>
                 <span className="detail-value">Safi, Maroc</span>
               </div>
             </div>
 
             <div className="social-links">
-              <a href="https://linkedin.com/in/achraf-ouahab-88019223b" target="_blank" rel="noopener noreferrer" className="social-btn">
-                LinkedIn
-              </a>
-              <a href="https://github.com/Achraf-Ouahab" target="_blank" rel="noopener noreferrer" className="social-btn">
-                GitHub
-              </a>
+              {socialLinks.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-btn"
+                >
+                  {item.icon}
+                  <span>{item.name}</span>
+                </a>
+              ))}
             </div>
           </div>
 
@@ -101,7 +125,7 @@ function Contact() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Votre nom"
+              placeholder={t('contact.name')}
               className="form-input"
             />
 
@@ -110,7 +134,7 @@ function Contact() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Votre email"
+              placeholder={t('contact.email')}
               className="form-input"
             />
 
@@ -118,24 +142,24 @@ function Contact() {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="Votre message"
+              placeholder={t('contact.message')}
               rows="6"
               className="form-textarea"
             ></textarea>
 
             <button onClick={handleSubmit} className="submit-btn" disabled={loading}>
-              {loading ? 'Envoi...' : 'Envoyer'}
+              {loading ? t('contact.sending') : t('contact.send')}
             </button>
 
             {status === 'success' && (
               <div className="status-success">
-                Message envoyé avec succès !
+                {t('contact.success')}
               </div>
             )}
 
             {status === 'error' && (
               <div className="status-error">
-                Erreur lors de l'envoi. Réessayez.
+                {t('contact.error')}
               </div>
             )}
           </div>

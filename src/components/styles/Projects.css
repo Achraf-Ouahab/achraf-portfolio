@@ -7,6 +7,14 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.projects-container.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Header */
@@ -53,6 +61,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -75,8 +84,14 @@
 .project-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .project-card:hover .project-image {
@@ -181,8 +196,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
@@ -202,6 +222,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -253,11 +274,7 @@
   background-color: #222831;
 }
 
-.modal-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+
 
 .slider-btn {
   position: absolute;

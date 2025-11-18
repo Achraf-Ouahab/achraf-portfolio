@@ -1,21 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './styles/Experience.css';
+import { useLanguage } from '../context/LanguageContext';
 
 function Experience() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('experience');
+
+  const [isVisible, setIsVisible] = useState(false);
+    useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    const section = document.getElementById("experience");
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   const experienceData = [
     {
-      title: 'Stage - Développeur Full Stack',
-      company: 'Aridium',
-      period: '2025',
-      location: 'Safi, Maroc',
-      description: 'Développement d\'une application de gestion de clinique dentaire',
+      title: t('experience.intern.title'),
+      company: t('experience.intern.company'),
+      period: t('experience.intern.period'),
+      location: t('experience.intern.location'),
+      description: t('experience.intern.description'),
       tasks: [
-        'Implémentation de plus de 6 modules (Plan de traitement, Gestion des utilisateurs, Paiement, Statistiques, Notifications)',
-        'Mise en place d\'une authentification JWT avec gestion des rôles et permissions',
-        'Création d\'interfaces utilisateur réactives avec Angular',
-        'Développement d\'API REST avec Spring Boot'
+        t('experience.intern.tasks.0'),
+        t('experience.intern.tasks.1'),
+        t('experience.intern.tasks.2'),
+        t('experience.intern.tasks.3')
       ],
       tech: ['Angular', 'Spring Boot', 'JWT', 'MySQL']
     }
@@ -23,28 +42,28 @@ function Experience() {
 
   const educationData = [
     {
-      degree: 'Diplôme d\'ingénieur d\'État en Informatique',
-      institution: 'École Nationale des Sciences Appliquées (ENSA)',
-      period: '2021 - Présent',
-      location: 'Safi, Maroc',
-      specialization: 'Développement logiciel',
-      description: 'Formation d\'ingénieur spécialisée en développement web et architecture logicielle'
+      degree: t('experience.engineering.degree'),
+      institution: t('experience.engineering.institution'),
+      period: t('experience.engineering.period'),
+      location: t('experience.engineering.location'),
+      specialization: t('experience.engineering.specialization'),
+      description: t('experience.engineering.description')
     },
     {
-      degree: 'Baccalauréat en Physique - Section Française',
-      institution: 'Lycée Mohamed Belhcen El Ouazzani',
-      period: '2019 - 2021',
-      location: 'Safi, Maroc',
-      description: 'Diplôme du baccalauréat avec mention'
+      degree: t('experience.baccalaureate.degree'),
+      institution: t('experience.baccalaureate.institution'),
+      period: t('experience.baccalaureate.period'),
+      location: t('experience.baccalaureate.location'),
+      description: t('experience.baccalaureate.description')
     }
   ];
 
   return (
     <section id="experience" className="experience-section">
-      <div className="experience-container">
+      <div className={`experience-container ${isVisible ? 'visible' : ''}`}>
         
         <div className="experience-header">
-          <h2 className="experience-title">Parcours</h2>
+          <h2 className="experience-title">{t('experience.title')}</h2>
           <div className="title-underline"></div>
         </div>
 
@@ -54,13 +73,13 @@ function Experience() {
             className={`tab ${activeTab === 'experience' ? 'active' : ''}`}
             onClick={() => setActiveTab('experience')}
           >
-            Expérience
+            {t('experience.experienceTab')}
           </button>
           <button 
             className={`tab ${activeTab === 'education' ? 'active' : ''}`}
             onClick={() => setActiveTab('education')}
           >
-            Formation
+            {t('experience.educationTab')}
           </button>
         </div>
 
@@ -128,7 +147,7 @@ function Experience() {
                     
                     {edu.specialization && (
                       <p className="timeline-specialization">
-                        <strong>Spécialité :</strong> {edu.specialization}
+                        <strong>{t('experience.specialityTitle')}</strong> {edu.specialization}
                       </p>
                     )}
                     
