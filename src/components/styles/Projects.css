@@ -400,6 +400,17 @@
   gap: 10px;
 }
 
+.github-links {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
+}
+
+.github-link-modal {
+  margin-left:30px;
+}
+
 /* Responsive */
 @media (max-width: 968px) {
   .modal-body {

@@ -7,21 +7,21 @@ function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-      useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        },
-        { threshold: 0.2 }
-      );
-  
-      const section = document.getElementById("projects");
-      if (section) observer.observe(section);
-  
-      return () => observer.disconnect();
-    }, []);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    const section = document.getElementById("projects");
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   const projects = [
     {
@@ -36,6 +36,10 @@ function Projects() {
         t('projects.atlasCar.features.1'),
         t('projects.atlasCar.features.2'),
         t('projects.atlasCar.features.3')
+      ],
+      github: [
+        { name: 'Frontend', url: 'https://github.com/Achraf-Ouahab/Front_CarReparation' },
+        { name: 'Backend', url: 'https://github.com/mohamedelqasemy/miniprojet_WebSiteCarReparation' }
       ],
       images: [
         '/assets/project_atlasCar/Video_ContactUs.png',
@@ -57,6 +61,9 @@ function Projects() {
         t('projects.safiTech.features.2'),
         t('projects.safiTech.features.3')
       ],
+      github: [
+        { name: 'Backend/Frontend', url: 'https://github.com/mohamedelqasemy/MINIPRO' }
+      ],
       images: [
 
         '/assets/project_safiTech/safitech1.png',
@@ -77,6 +84,9 @@ function Projects() {
         t('projects.maintenance.features.2'),
         t('projects.maintenance.features.3')
       ],
+      github: [
+        { name: 'Backend/Frontend', url: 'https://github.com/Must-Addazi/AspNetMaintenanceApp' }
+      ],
       images: [
         '/assets/projet_mainetenance/Mainetenance1.png',
         '/assets/projet_mainetenance/Mainetenance2.png',
@@ -95,6 +105,11 @@ function Projects() {
         t('projects.rentalCar.features.2'),
         t('projects.rentalCar.features.3'),
       ],
+      github: [
+        { name: 'Frontend', url: 'https://github.com/mohamedelqasemy/FrontEnd_LocationVoiture' },
+        { name: 'Backend-Laravel', url: 'https://github.com/Achraf-Ouahab/Location_Voiture' },
+        { name: 'Backend-SpringBoot', url: 'https://github.com/mohamedelqasemy/LocationVoitureSpringBoot' }
+      ],
       images: [
         '/assets/project_rentalCar/azulcar.jpg',
       ]
@@ -110,6 +125,11 @@ function Projects() {
         t('projects.birdWorld.features.0'),
         t('projects.birdWorld.features.1'),
         t('projects.birdWorld.features.2'),
+      ],
+      github: [
+        { name: 'Application', url: 'https://github.com/Must-Addazi/bird-world-flutter-app' },
+        { name: 'Model-audio', url: 'https://github.com/Achraf-Ouahab/audio-bird-api' },
+        { name: 'Model-image', url: 'https://github.com/mohamedelqasemy/bird_recognition_image' },
       ],
       images: [
         '/assets/project_birdWorld/mockuper.png',
@@ -131,6 +151,9 @@ function Projects() {
         t('projects.dwano.features.1'),
         t('projects.dwano.features.2'),
         t('projects.dwano.features.3'),
+      ],
+      github: [
+        { name: 'Application', url: 'https://github.com/mohamedelqasemy/DWANO_ProjetMobile' },
       ],
       images: [
         '/assets/project_dwano/dwano-0.jpg',
@@ -216,6 +239,27 @@ function Projects() {
                   ))}
                 </div>
               </div>
+              {project.github && project.github.length > 0 && (
+                <div className="modal-github">
+                  <div className="github-links">
+                    {project.github.map((repo, idx) => (
+                      <a
+                        key={idx}
+                        href={repo.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="github-link-modal"
+                        title={repo.name}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {/*card*/}
             </div>
           ))}
         </div>

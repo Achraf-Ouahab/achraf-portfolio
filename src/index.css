@@ -117,7 +117,7 @@ a {
   height: 90vh;
   display: flex;
   align-items: center;
-  padding-top: 90px; /* Espace pour la navbar */
+  padding-top: 60px; /* Espace pour la navbar */
 }
 
 .hero-overlay {
