@@ -50,8 +50,8 @@ export const translations = {
       // Ajouts pour les projets spécifiques
       atlasCar: {
         title: "Atlas Car Repair",
-        description: "Vehicle repair website with microservices architecture",
-        details: "Development of a vehicle repair website with microservices architecture (17 services) and integration of an AI model for fault detection.",
+        description: "Car repair website with microservices architecture",
+        details: "Development of a car repair website with microservices architecture (17 services) and integration of an AI model for fault detection.",
         features: [
           "Microservices architecture (17 services)",
           "AI model for fault detection",

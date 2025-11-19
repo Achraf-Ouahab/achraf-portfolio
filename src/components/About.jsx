@@ -38,7 +38,7 @@ function About() {
               <div className="image-border">
                 <div className="image-wrapper">
                   <img
-                    src="/assets/me.jpg"
+                    src="/assets/me-f.jpg"
                     alt="OUAHAB Achraf"
                     className="profile-image"
                   />

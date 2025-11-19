@@ -69,6 +69,7 @@ function Projects() {
         '/assets/project_safiTech/safitech1.png',
         '/assets/project_safiTech/safitech2.png',
         '/assets/project_safiTech/safitech3.png',
+        '/assets/project_safiTech/safitech4.png',
       ]
     },
     {
