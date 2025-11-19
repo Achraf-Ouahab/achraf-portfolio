@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './styles/Contact.css';
 import { useLanguage } from '../context/LanguageContext';
-import  socialLinks  from '../data/SocialLinks.jsx';
+import socialLinks from "../data/socialLinks.jsx";
 
 function Contact() {
   const { t } = useLanguage();
